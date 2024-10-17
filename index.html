@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Камень, ножницы, бумага</title>
+    </head>
+    <body>
+        <h1>Камень, ножницы, бумага</h1>
+        <div id="buttons-container">
+            <!-- Кнопки для выбора пользователя -->
+            <button id="rock">Камень</button>
+            <button id="scissors">Ножницы</button>
+            <button id="paper">Бумага</button>
+        </div>
+        <!-- Абзац для отображения результатов игры -->
+        <p id="results"></p>
+        <script>
+            // Функция для обработки выбора пользователя
+            function handleUserChoice(userChoice) {
+                // Массив возможных вариантов выбора
+                const choices = ['Камень', 'Ножницы', 'Бумага'];
+                
+                // Генерация случайного индекса для выбора компьютера
+                let randomIndex = Math.floor(Math.random() * 3);
+                const computerChoice = choices[randomIndex];
+    
+                // Инициализация переменной для хранения результата игры
+                let result = '';
+    
+                // Проверка, ничья ли
+                if (userChoice === computerChoice) {
+                    result = 'Ничья';
+                } 
+                // Проверка условий победы пользователя
+                else if (
+                    (userChoice === 'Камень' && computerChoice === 'Ножницы') ||
+                    (userChoice === 'Ножницы' && computerChoice === 'Бумага') ||
+                    (userChoice === 'Бумага' && computerChoice === 'Камень')
+                ) {
+                    result = 'Вы победили!';
+                } 
+                // В противном случае выигрывает компьютер
+                else {
+                    result = 'Вы проиграли.';
+                }
+    
+                // Обновление текста в элементе с id="results" для отображения результата
+                document.getElementById('results').textContent = 
+                    `Вы выбрали ${userChoice}, компьютер выбрал ${computerChoice}, ${result}`;
+            }
+    
+            // Добавление обработчика события 'click' для кнопки "Камень"
+            document.getElementById('rock').addEventListener('click', function() {
+                handleUserChoice('Камень');
+            });
+    
+            // Добавление обработчика события 'click' для кнопки "Ножницы"
+            document.getElementById('scissors').addEventListener('click', function() {
+                handleUserChoice('Ножницы');
+            });
+    
+            // Добавление обработчика события 'click' для кнопки "Бумага"
+            document.getElementById('paper').addEventListener('click', function() {
+                handleUserChoice('Бумага');
+            });
+        </script>
+    </body>
+</html>
